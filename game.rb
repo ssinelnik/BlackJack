@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require './dealer'
-require './player/'
-require './card'
+require './player'
+require './cards'
 
 class Game
 
