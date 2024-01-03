@@ -3,7 +3,7 @@
 
 class Player
 
-  attr_accessor :bank
+  attr_accessor :bank, :name
 
   def initialize() # create a player
     # ..
