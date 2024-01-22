@@ -8,8 +8,8 @@ class Player
 
   def initialize(name) # create a player
     @name = name
-    bank = 100
-    hand = []
+    @bank = 100
+    @hand = []
   end
 
   def get_starting_cards # player make a bet
@@ -17,5 +17,5 @@ class Player
   end
 
   
-  
+
 end

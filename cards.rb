@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class Cards
   attr_accessor :card_number, :card_power, :card_suit, :card_owner
 
-  # def Cards.two_card_draw(user)
-  #   2.times { user.hand.push(@@cards[rand(1..52)]) }
-  # end
+  def self.two_card_draw(user)
+    2.times { user.hand.push(@@cards[rand(1..52)]) }
+  end
 
-  def initialize(card_number, card_owner, card_suit, card_power)
+  def initialize(card_number, card_owner, card_suit, card_power) # need code formatting
     @card_number = card_number
     @card_owner = card_owner
     @card_suit = card_suit
@@ -66,5 +68,5 @@ class Cards
             c_52 = Cards.new(52, "nobody", "\u2663", "A") ]
 
   # cards.each { |item| puts "#{item.card_number}: #{item.card_power}#{item.card_suit}" if item.card_number == rand(1..52) }
-  2.times { puts @@cards[rand(1..52)] }
+  # 2.times { puts @@cards[rand(1..52)] }
 end

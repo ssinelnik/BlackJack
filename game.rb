@@ -1,51 +1,72 @@
 # frozen_string_literal: true
 
+# description:
+# 1. connected all classes
+# 2. has a main menu
+# 3. has a start_game method
+
 require './dealer'
 require './player'
 require './cards'
 
 class Game
 
-  MENU = [
-    {index: 1, title: "show player bank", action: :show_player_bank }
+  MENU_0 = [
+    { index: 1, title: "start a game", action: :start_game },
+    { index: 2, title: "quit the game", action: :quit_game }
   ].freeze
 
-  def initialize() # start a new game
-    # ..
-    # @cards = {
-    #   "1": "A^", "2": "2^", "3": "3^", "4": "4^", "5": "5^", "6": "6^", "7": "7^", "8": "8^", "9": "9^", "10": "10^", "11": "J^", "12": "Q^", "13": "K^", # spades
-    #   "14": "A+", "15": "2+", "16": "3+", "17": "4+", "18": "5+", "19": "6+", "20": "7+", "21": "8+", "22": "9+", "23": "10+", "24": "J+", "25": "Q+", "26": "K+", # crosses
-    #   "27": "A<>", "28": "2<>", "29": "3<>", "30": "4<>", "31": "5<>", "32": "6<>", "33": "7<>", "34": "8<>", "35": "9<>", "36": "10<>", "37": "J<>", "38": "Q<>", "39": "K<>", # diamonds
-    #   "40": "A<3", "41": "2<3", "42": "3<3", "43": "4<3", "44": "5<3", "45": "6<3", "46": "7<3", "47": "8<3", "48": "9<3", "49": "10<3", "50": "J<3", "51": "Q<3", "52": "K<3" # hearts
-    # }
-    start_game
+  MENU_1 = [
+    { index: 1, title: "continue the game", action: :continue_the_game },
+    { index: 2, title: "retake all cards hand", action: :retake_cards },
+    { index: 3, title: "exit to main menu", action: :main_menu },
+  ].freeze
+
+  def initialize() # create a game class object
+    main_menu
   end
 
-  def start_game # ui
+  def main_menu # deafualt method start working, when game class object was created
     loop do
-      puts 'Enter your choice'
-      MENU.each { |item| puts "#{item[:index]}: #{item[:title]}" }
-      choice = gets.chomp.to_i
-      need_item = MENU.find { |item| item[:index] == choice }
-      send(need_item[:action])
-      puts "Enter '0' if you want с a game"
-      break unless gets.chomp.to_i.zero?
+      puts 'Enter your choice' # ask user choice
+      MENU_0.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_0
+      choice = gets.chomp.to_i # get user choice
+      need_item = MENU_0.find { |item| item[:index] == choice } # find menu element by user choice
+      send(need_item[:action]) # ??
+      puts "Enter '0' if you want end the game" 
+      break unless gets.chomp.to_i.zero? # ??
     end
   end
 
-  def show_cards # show all 52 cards
-    @cards.each do |number, suit|
-      puts "#{number}: #{suit}"
-    end
+  def start_game # method start working, if user choice start_game
+    print "The game is starting! Enter your name -> " # ask user name
+    user_name = gets.chomp.to_s # get user name
+    new_player = Player.new(user_name) # create new Player class object
+    Cards.two_card_draw(new_player) # draw two start cards for player and dealer
+    puts "You create a player #{new_player.name} with start bank #{new_player.bank}$ and start hand (#{new_player.hand[0].card_power}#{new_player.hand[0].card_suit}, #{new_player.hand[1].card_power}#{new_player.hand[1].card_suit})."
+    # puts "#{new_player}: #{new_player.name}, #{new_player.bank}, #{new_player.hand}" # test print for developer
+    continue_or_no # ask method continue or no
   end
 
-  def random_cards # give one random card
-    puts @cards[rand(@cards.values.size)]
+  def continue_or_no
+    puts 'Player can accept cards and continue the game, or retake cards hand. Enter your choice' # ask user choice
+    MENU_1.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_1
+    choice = gets.chomp.to_i # get user choice
+    need_item = MENU_1.find { |item| item[:index] == choice } # find menu element by user choice
+    send(need_item[:action]) # ??
   end
 
-  def show_player_bank
-    puts "100"
+  def continue_the_game
+    # ..
   end
 
-  Game.new
+  def retake_cards
+    # ..
+  end
+
+  def quit_game
+    abort "The game is over! See you soon!" # program end and print message
+  end
+
+  Game.new # create new Game class object
 end
