@@ -54,6 +54,7 @@ class Game
     choice = gets.chomp.to_i # get user choice
     need_item = MENU_1.find { |item| item[:index] == choice } # find menu element by user choice
     send(need_item[:action]) # ??
+    continue_the_game
   end
 
   def continue_the_game

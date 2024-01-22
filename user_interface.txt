@@ -1,0 +1,16 @@
+CON #1
+-------------
+user: K♦, 5♦
+bank: 90$
+bet: 10$
+
+table: 10♦
+
+dealer: *, *
+bank: 90$
+bet: 10$
+-------------
+Alexander, enter your choice:
+1: add a card
+2: check
+3: show cards
