@@ -22,8 +22,8 @@ class Game
   ].freeze
 
   MENU_2 = [
-    { index: 1, title: "add a card", action: :add_a_card },
-    { index: 2, title: "check", action: :check },
+    { index: 1, title: "hit (add a card)", action: :hit },
+    { index: 2, title: "stand (pass)", action: :stand },
     { index: 3, title: "show cards", action: :show_cards }
   ]
 
@@ -47,15 +47,18 @@ class Game
     print "The game is starting! Enter your name -> " # ask user name
     user_name = gets.chomp.to_s # get user name
     @new_player = Player.new(user_name) # create new Player class object
+    @dealer = Dealer.new
     Cards.two_cards_draw(@new_player) # draw two start cards for player and dealer
+    Cards.two_cards_draw(@dealer)
     @new_player.bank -= 10
+    @dealer.bank -= 10
     puts "You create a player #{@new_player.name} with start bank #{@new_player.bank}$ and start hand (#{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit})."
     # puts "#{@new_player}: #{@new_player.name}, #{@new_player.bank}, #{@new_player.hand}" # test print for developer
     continue_or_no # ask method continue or no
   end
 
   def continue_or_no
-    puts 'Player can accept cards and continue the game, or retake cards hand. Enter your choice' # ask user choice
+    puts 'Player can accept cards and continue the game, or retake cards hand. Enter your choice:' # ask user choice
     MENU_1.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_1
     choice = gets.chomp.to_i # get user choice
     need_item = MENU_1.find { |item| item[:index] == choice } # find menu element by user choice
@@ -63,15 +66,11 @@ class Game
     continue_the_game
   end
 
-  def continue_the_game
+  def hit
     # ..
   end
 
-  def add_a_card
-    # ..
-  end
-
-  def check
+  def stand
     # ..
   end
 
@@ -82,19 +81,31 @@ class Game
   def retake_cards
     @new_player.clear_hand
     Cards.two_cards_draw(@new_player)
+    Cards.two_cards_draw(@dealer)
     puts "New cards for player #{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
     # puts "#{@new_player.hand}"
     continue_or_no
   end
 
-  def game 
+  def continue_the_game 
+    puts
     puts "CON #1"
     puts "-------------"
-    puts "#{new_player}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
+    puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
+    puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force}"
     puts "bank: #{@new_player.bank}"
     puts "bet: 10$"
     puts
-    puts "table "
+    puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+    puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
+    puts "bank: #{@dealer.bank}"
+    puts "bet: 10$"
+    puts "-------------"
+    puts "#{@new_player.name}, enter your choice:"
+    MENU_2.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_2
+    choice = gets.chomp.to_i # get user choice
+    need_item = MENU_2.find { |item| item[:index] == choice } # find menu element by user choice
+    send(need_item[:action]) # ??
   end
 
   def quit_game
