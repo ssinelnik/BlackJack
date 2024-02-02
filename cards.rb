@@ -3,7 +3,7 @@
 class Cards
   attr_accessor :card_number, :card_power, :card_suit, :card_owner
 
-  def self.two_card_draw(user)
+  def self.two_cards_draw(user)
     2.times { user.hand.push(@@cards[rand(1..52)]) }
   end
 

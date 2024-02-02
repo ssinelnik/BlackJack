@@ -10,7 +10,6 @@ require './player'
 require './cards'
 
 class Game
-
   MENU_0 = [
     { index: 1, title: "start a game", action: :start_game },
     { index: 2, title: "quit the game", action: :quit_game }
@@ -21,6 +20,12 @@ class Game
     { index: 2, title: "retake all cards hand", action: :retake_cards },
     { index: 3, title: "exit to main menu", action: :main_menu },
   ].freeze
+
+  MENU_2 = [
+    { index: 1, title: "add a card", action: :add_a_card },
+    { index: 2, title: "check", action: :check },
+    { index: 3, title: "show cards", action: :show_cards }
+  ]
 
   def initialize() # create a game class object
     main_menu
@@ -41,10 +46,11 @@ class Game
   def start_game # method start working, if user choice start_game
     print "The game is starting! Enter your name -> " # ask user name
     user_name = gets.chomp.to_s # get user name
-    new_player = Player.new(user_name) # create new Player class object
-    Cards.two_card_draw(new_player) # draw two start cards for player and dealer
-    puts "You create a player #{new_player.name} with start bank #{new_player.bank}$ and start hand (#{new_player.hand[0].card_power}#{new_player.hand[0].card_suit}, #{new_player.hand[1].card_power}#{new_player.hand[1].card_suit})."
-    # puts "#{new_player}: #{new_player.name}, #{new_player.bank}, #{new_player.hand}" # test print for developer
+    @new_player = Player.new(user_name) # create new Player class object
+    Cards.two_cards_draw(@new_player) # draw two start cards for player and dealer
+    @new_player.bank -= 10
+    puts "You create a player #{@new_player.name} with start bank #{@new_player.bank}$ and start hand (#{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit})."
+    # puts "#{@new_player}: #{@new_player.name}, #{@new_player.bank}, #{@new_player.hand}" # test print for developer
     continue_or_no # ask method continue or no
   end
 
@@ -61,8 +67,34 @@ class Game
     # ..
   end
 
-  def retake_cards
+  def add_a_card
     # ..
+  end
+
+  def check
+    # ..
+  end
+
+  def show_cards
+    # ..
+  end
+
+  def retake_cards
+    @new_player.clear_hand
+    Cards.two_cards_draw(@new_player)
+    puts "New cards for player #{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
+    # puts "#{@new_player.hand}"
+    continue_or_no
+  end
+
+  def game 
+    puts "CON #1"
+    puts "-------------"
+    puts "#{new_player}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
+    puts "bank: #{@new_player.bank}"
+    puts "bet: 10$"
+    puts
+    puts "table "
   end
 
   def quit_game

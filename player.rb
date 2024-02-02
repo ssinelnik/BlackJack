@@ -16,6 +16,7 @@ class Player
     # ..
   end
 
-  
-
+  def clear_hand
+    @hand.clear()
+  end
 end
