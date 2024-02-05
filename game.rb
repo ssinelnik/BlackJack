@@ -67,7 +67,26 @@ class Game
   end
 
   def hit
-    # ..
+    Cards.one_card_draw(@new_player)
+    puts
+    puts "CON #2"
+    puts "-------------"
+    puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}, "
+    puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force}"
+    puts "bank: #{@new_player.bank}"
+    puts "bet: 10$"
+    puts
+    puts "dealer: *, *"
+    # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+    puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
+    puts "bank: #{@dealer.bank}"
+    puts "bet: 10$"
+    puts "-------------"
+    puts "#{@new_player.name}, enter your choice:"
+    MENU_2.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_2
+    choice = gets.chomp.to_i # get user choice
+    need_item = MENU_2.find { |item| item[:index] == choice } # find menu element by user choice
+    send(need_item[:action]) # ??
   end
 
   def stand
@@ -96,7 +115,8 @@ class Game
     puts "bank: #{@new_player.bank}"
     puts "bet: 10$"
     puts
-    puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+    puts "dealer: *, *"
+    # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
     puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
     puts "bank: #{@dealer.bank}"
     puts "bet: 10$"
