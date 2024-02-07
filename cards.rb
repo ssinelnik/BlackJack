@@ -9,8 +9,8 @@ class Cards
 
   def self.one_card_draw(user) # check this method ??
     user.hand.push(@@cards[rand(1..52)])
-    # if user.hand[0].card_number == user.hand[3].card_number || user.hand[1].card_number == user.hand[2].card_number
-    if self.get_card_number(user) == user.hand[3].card_number || self.get_card_number(user) == user.hand[2].card_number
+    if user.hand[0].card_number == user.hand[2].card_number || user.hand[1].card_number == user.hand[2].card_number
+    # if self.get_card_number(user) == user.hand[2].card_number || self.get_card_number(user) == user.hand[2].card_number
        delete_at(2)
        self.one_card_draw(user)
     end
