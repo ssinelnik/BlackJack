@@ -7,7 +7,7 @@ class Cards
     2.times { user.hand.push(@@cards[rand(1..52)]) }
   end
 
-  def self.one_card_draw(user) # check this method ??
+  def self.one_card_draw(user) # check this method ?? - worked !!
     user.hand.push(@@cards[rand(1..52)])
     if user.hand[0].card_number == user.hand[2].card_number || user.hand[1].card_number == user.hand[2].card_number
     # if self.get_card_number(user) == user.hand[2].card_number || self.get_card_number(user) == user.hand[2].card_number
@@ -16,9 +16,9 @@ class Cards
     end
   end
 
-  def self.get_card_number(user) # worked !!
-    user.hand[0].card_number
-  end
+  # def self.get_card_number(user) # worked !!
+  #   user.hand[0].card_number
+  # end
 
   def initialize(card_number, card_owner, card_suit, card_power, card_force) # need code formatting
     @card_number = card_number
