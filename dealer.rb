@@ -10,7 +10,7 @@ class Dealer
     @hand = []
   end
 
-  def make_bet # dealer make a bet
-    # ..
+  def clear_hand
+    @hand.clear()
   end
 end

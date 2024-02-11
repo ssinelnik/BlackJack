@@ -71,17 +71,32 @@ class Game
     puts
     puts "CON #2"
     puts "-------------"
-    puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}, "
-    puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force}"
+    puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}, #{@new_player.hand[2].card_power}#{@new_player.hand[2].card_suit}"
+    puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force + @new_player.hand[2].card_force}"
     puts "bank: #{@new_player.bank}"
     puts "bet: 10$"
     puts
-    puts "dealer: *, *"
-    # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
-    puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
-    puts "bank: #{@dealer.bank}"
-    puts "bet: 10$"
-    puts "-------------"
+    
+    if @dealer.hand[0].card_force + @dealer.hand[1].card_force < 17
+      # puts "dealer: *, *"
+      # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+      Cards.one_card_draw(@dealer)
+      puts "dealer: *, *, *"
+      # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}, #{@dealer.hand[2].card_power}#{@dealer.hand[2].card_suit}"
+      puts "sum: *"
+      # puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force + @dealer.hand[2].card_force}"
+      puts "bank: #{@dealer.bank}"
+      puts "bet: 10$"
+      puts "-------------"
+    else
+      puts "dealer: *, *"
+      # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+      puts "sum: *"
+      # puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
+      puts "bank: #{@dealer.bank}"
+      puts "bet: 10$"
+      puts "-------------"
+    end
     puts "#{@new_player.name}, enter your choice:"
     MENU_2.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_2
     choice = gets.chomp.to_i # get user choice
@@ -90,11 +105,72 @@ class Game
   end
 
   def stand
-    # ..
+    # Cards.one_card_draw(@new_player)
+    puts
+    puts "CON #2"
+    puts "-------------"
+    puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
+    puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force}"
+    puts "bank: #{@new_player.bank}"
+    puts "bet: 10$"
+    puts
+    
+    if @dealer.hand[0].card_force + @dealer.hand[1].card_force < 17
+      # puts "dealer: *, *"
+      # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+      Cards.one_card_draw(@dealer)
+      puts "dealer: *, *, *"
+      # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}, #{@dealer.hand[2].card_power}#{@dealer.hand[2].card_suit}"
+      puts "sum: *"
+      # puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force + @dealer.hand[2].card_force}"
+      puts "bank: #{@dealer.bank}"
+      puts "bet: 10$"
+      puts "-------------"
+    else
+      puts "dealer: *, *"
+      # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+      puts "sum: *"
+      # puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
+      puts "bank: #{@dealer.bank}"
+      puts "bet: 10$"
+      puts "-------------"
+    end
+    puts "#{@new_player.name}, enter your choice:"
+    MENU_2.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_2
+    choice = gets.chomp.to_i # get user choice
+    need_item = MENU_2.find { |item| item[:index] == choice } # find menu element by user choice
+    send(need_item[:action]) # ??
   end
 
   def show_cards
-    # ..
+    puts
+    puts "CON #2"
+    puts "-------------"
+    if @new_player.hand[2].nil? # `if` for a player
+      puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
+      puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force}"
+    else
+      puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}, #{@new_player.hand[2].card_power}#{@new_player.hand[2].card_suit}"
+      puts "sum: #{@new_player.hand[0].card_force + @new_player.hand[1].card_force + @new_player.hand[2].card_force}"
+    end
+    puts "bank: #{@new_player.bank}"
+    puts "bet: 10$"
+    puts
+    if @dealer.hand[2].nil? # `if` for a dealer
+      puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
+      puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
+    else
+      puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}, #{@dealer.hand[2].card_power}#{@dealer.hand[2].card_power}"
+      puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force + @dealer.hand[2].card_force}"
+    end
+    puts "bank: #{@dealer.bank}"
+    puts "bet: 10$"
+    puts "-------------"
+    puts "#{@new_player.name}, enter your choice:"
+    MENU_2.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_2
+    choice = gets.chomp.to_i # get user choice
+    need_item = MENU_2.find { |item| item[:index] == choice } # find menu element by user choice
+    send(need_item[:action]) # ??
   end
 
   def retake_cards
@@ -117,7 +193,8 @@ class Game
     puts
     puts "dealer: *, *"
     # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
-    puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
+    puts "sum: *"
+    # puts "sum: #{@dealer.hand[0].card_force + @dealer.hand[1].card_force}"
     puts "bank: #{@dealer.bank}"
     puts "bet: 10$"
     puts "-------------"
