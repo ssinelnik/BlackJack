@@ -5,13 +5,12 @@
 # 2. has a main menu
 # 3. has a start_game method
 
+require './modules/constants'
 require './dealer'
 require './player'
 require './cards'
 
 class Game
-  TWENTY_ONE = 21 # main game constant
-
   MENU_0 = [
     { index: 1, title: "start a game", action: :start_game },
     { index: 2, title: "quit the game", action: :quit_game }
@@ -168,10 +167,8 @@ class Game
     puts "bank: #{@dealer.bank}"
     puts "bet: 10$"
     puts "-------------"
-    puts "#{@new_player} is a winner!" if final_sum_player > final_sum_dealer
-    puts "#{@dealer} is a winner!" unless final_sum_player > final_sum_dealer
-    puts final_sum_dealer # test puts
-    puts final_sum_player # test puts
+    puts "#{@new_player.name} is a winner!" if final_sum_player > final_sum_dealer && final_sum_player < TWENTY_ONE
+    puts "Dealer is a winner!" if final_sum_player < final_sum_dealer && final_sum_dealer < TWENTY_ONE
     puts "-------------"
     puts "#{@new_player.name}, enter your choice:"
     MENU_2.each { |item| puts "#{item[:index]}: #{item[:title]}" } # show MENU_2

@@ -1,0 +1,17 @@
+ERROR #1:
+
+alexandersinelnik@Alexanders-MacBook-Air BlackJack % ruby game.rb
+Enter your choice
+1: start a game
+2: quit the game
+1
+The game is starting! Enter your name -> Alexander
+Traceback (most recent call last):
+	7: from game.rb:13:in `<main>'
+	6: from game.rb:220:in `<class:Game>'
+	5: from game.rb:220:in `new'
+	4: from game.rb:33:in `initialize'
+	3: from game.rb:37:in `main_menu'
+	2: from game.rb:37:in `loop'
+	1: from game.rb:42:in `block in main_menu'
+game.rb:57:in `start_game': undefined method `card_power' for nil:NilClass (NoMethodError)

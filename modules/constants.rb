@@ -1,0 +1,1 @@
+TWENTY_ONE = 21 # main game constant

@@ -1,24 +1,33 @@
 # frozen_string_literal: true
 
+require './modules/constants'
+
 class Cards
   attr_accessor :card_number, :card_power, :card_suit, :card_owner, :card_force
 
-  def self.two_cards_draw(user) # worked !!
+  def self.two_cards_draw(user)
     2.times { user.hand.push(@@cards[rand(1..52)]) }
   end
 
-  def self.one_card_draw(user) # check this method ?? - worked !!
+  def self.one_card_draw(user)
     user.hand.push(@@cards[rand(1..52)])
     if user.hand[0].card_number == user.hand[2].card_number || user.hand[1].card_number == user.hand[2].card_number
-    # if self.get_card_number(user) == user.hand[2].card_number || self.get_card_number(user) == user.hand[2].card_number
        delete_at(2)
        self.one_card_draw(user)
     end
   end
 
-  # def self.get_card_number(user) # worked !!
-  #   user.hand[0].card_number
-  # end
+  def self.print_cards
+    @@cards.each { |element| puts "#{element.card_number}, #{element.card_owner}, #{element.card_suit}, #{element.card_power}, #{element.card_force}"}
+  end
+
+  def self.recalculate_A(sum) # check on work !!
+    @@cards.each{ |element| element.card_force = 1 if TWENTY_ONE - sum > 0 && (element.card_number == 13 || element.card_number == 26 || element.card_number == 39 || element.card_number == 52)}
+    puts "#{@@cards[12]}: #{@@cards[12].card_number}, #{@@cards[12].card_owner}, #{@@cards[12].card_suit}, #{@@cards[12].card_power}, #{@@cards[12].card_force}"
+    puts "#{@@cards[25]}: #{@@cards[25].card_number}, #{@@cards[25].card_owner}, #{@@cards[25].card_suit}, #{@@cards[25].card_power}, #{@@cards[25].card_force}"
+    puts "#{@@cards[38]}: #{@@cards[38].card_number}, #{@@cards[38].card_owner}, #{@@cards[38].card_suit}, #{@@cards[38].card_power}, #{@@cards[38].card_force}"
+    puts "#{@@cards[51]}: #{@@cards[51].card_number}, #{@@cards[51].card_owner}, #{@@cards[51].card_suit}, #{@@cards[51].card_power}, #{@@cards[51].card_force}"
+  end
 
   def initialize(card_number, card_owner, card_suit, card_power, card_force) # need code formatting
     @card_number = card_number
@@ -80,7 +89,4 @@ class Cards
             c_50 = Cards.new(50, "nobody", "\u2663", "Q", 10),
             c_51 = Cards.new(51, "nobody", "\u2663", "K", 10),
             c_52 = Cards.new(52, "nobody", "\u2663", "A", 10) ]
-
-  # cards.each { |item| puts "#{item.card_number}: #{item.card_power}#{item.card_suit}" if item.card_number == rand(1..52) }
-  # 2.times { puts @@cards[rand(1..52)] }
 end
