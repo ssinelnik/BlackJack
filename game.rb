@@ -70,6 +70,7 @@ class Game
 
   def hit
     Cards.one_card_draw(@new_player)
+    Cards.recalculate_A(@new_player)
     puts
     puts "CON #2"
     puts "-------------"
@@ -81,6 +82,7 @@ class Game
     
     if @dealer.sum_two < 17
       Cards.one_card_draw(@dealer)
+      Cards.recalculate_A(@dealer)
       puts "dealer: *, *, *"
       puts "sum: *"
       puts "bank: #{@dealer.bank}"
@@ -116,6 +118,7 @@ class Game
       # puts "dealer: *, *"
       # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}"
       Cards.one_card_draw(@dealer)
+      Cards.recalculate_A(@dealer)
       puts "dealer: *, *, *"
       # puts "dealer: #{@dealer.hand[0].card_power}#{@dealer.hand[0].card_suit}, #{@dealer.hand[1].card_power}#{@dealer.hand[1].card_suit}, #{@dealer.hand[2].card_power}#{@dealer.hand[2].card_suit}"
       puts "sum: *"
@@ -192,7 +195,7 @@ class Game
     continue_or_no
   end
 
-  def continue_the_game 
+  def continue_the_game  
     puts
     puts "CON #1"
     puts "-------------"

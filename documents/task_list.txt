@@ -5,6 +5,7 @@ Not started:
 - delete unnecessary comments
 - realize the alternative if the result is a draw
 - check start_game() method, see errors
+- code formating initialize() methods
 
 In progress:
 - complete make a bet realization
