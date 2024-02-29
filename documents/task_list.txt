@@ -2,13 +2,13 @@ Not started:
 - create new document and write validation class
 - check classes by RuboCop
 - realization a card hash
-- delete unnecessary comments
 - realize the alternative if the result is a draw
 - check start_game() method, see errors
 - code formating initialize() methods
 
 In progress:
-- complete make a bet realization
+- check stand() method
+- create the winning condition in show_cards()
 - create a method in the Cards class to recalculate card_power for A♣, A♤, A♦, A♥, depending on the condition, see TS
   -> create a condition
 
@@ -24,3 +24,5 @@ Done:
 - create TS
 - move sum calculating in Player and Dealer classes
 - arrange for the distribution of playing cards to the dealer
+- complete make a bet realization
+- delete unnecessary comments

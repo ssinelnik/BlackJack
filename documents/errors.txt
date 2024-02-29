@@ -15,3 +15,20 @@ Traceback (most recent call last):
 	2: from game.rb:37:in `loop'
 	1: from game.rb:42:in `block in main_menu'
 game.rb:57:in `start_game': undefined method `card_power' for nil:NilClass (NoMethodError)
+
+
+ERROR #2:
+
+Traceback (most recent call last):
+	11: from game.rb:6:in `<main>'
+	10: from game.rb:240:in `<class:Game>'
+	 9: from game.rb:240:in `new'
+	 8: from game.rb:38:in `initialize'
+	 7: from game.rb:42:in `main_menu'
+	 6: from game.rb:42:in `loop'
+	 5: from game.rb:47:in `block in main_menu'
+	 4: from game.rb:63:in `start_game'
+	 3: from game.rb:71:in `continue_or_no'
+	 2: from game.rb:233:in `continue_the_game'
+	 1: from game.rb:119:in `stand'
+/Users/alexandersinelnik/Documents/Ruby/BlackJack/dealer.rb:15:in `sum_two': undefined method `card_force' for nil:NilClass (NoMethodError)

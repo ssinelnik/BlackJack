@@ -1,7 +1,3 @@
-# frozen_string_literal: true
-
-# require './cards'
-
 class Player
 
   attr_accessor :bank, :name, :hand, :bet
@@ -25,7 +21,8 @@ class Player
     @hand.clear()
   end
 
-  def player_bet(bet) # make a player bet
-    @bank -= bet
+  def player_bet(play_bet) # make a player bet
+    @bank -= play_bet
+    @bet += play_bet
   end
 end

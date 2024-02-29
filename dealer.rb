@@ -23,7 +23,8 @@ class Dealer
     @hand.clear()
   end
 
-  def dealer_bet(bet) # make a player bet
-    @bank -= bet
+  def dealer_bet(play_bet) # make a dealer bet
+    @bank -= play_bet
+    @bet += play_bet
   end
 end
