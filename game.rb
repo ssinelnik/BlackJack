@@ -29,7 +29,7 @@ class Game
   ].freeze
 
   MENU_4 = [
-    { index: 1, title: "start a new game", action: :start_game },
+    { index: 1, title: "start a new game", action: :restart_game },
     { index: 2, title: "quit the game", action: :quit_game }
   ].freeze
 
@@ -48,6 +48,19 @@ class Game
       puts "Enter '0' if you want end the game" 
       break unless gets.chomp.to_i.zero?
     end
+  end
+
+  def restart_game
+    @new_player.clear_hand
+    @dealer.clear_hand
+    Cards.two_cards_draw(@new_player) 
+    Cards.two_cards_draw(@dealer)
+    @new_player.clear_bet_bank
+    @dealer.clear_bet_bank
+    @new_player.bank -= @new_player.bet
+    @dealer.bank -= @dealer.bet 
+    puts "#{puts}#{@new_player.name} start a new game with bank #{@new_player.bank}$ and start hand (#{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit})."
+    continue_or_no
   end
 
   def start_game 

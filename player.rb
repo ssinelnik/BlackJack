@@ -21,6 +21,11 @@ class Player
     @hand.clear()
   end
 
+  def clear_bet_bank
+    @bet = 10
+    @bank = 100
+  end
+
   def player_bet(play_bet) # make a player bet
     @bank -= play_bet
     @bet += play_bet
