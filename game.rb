@@ -58,7 +58,7 @@ class Game
     Cards.two_cards_draw(@new_player) 
     Cards.two_cards_draw(@dealer)
     @new_player.bank -= @new_player.bet
-    @dealer.bank -= @dealer.bet
+    @dealer.bank -= @dealer.bet 
     puts "You create a player #{@new_player.name} with start bank #{@new_player.bank}$ and start hand (#{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit})."
     continue_or_no
   end
@@ -113,7 +113,7 @@ class Game
     puts "#{@new_player.name}: #{@new_player.hand[0].card_power}#{@new_player.hand[0].card_suit}, #{@new_player.hand[1].card_power}#{@new_player.hand[1].card_suit}"
     puts "sum: #{@new_player.sum_two}"
     puts "bank: #{@new_player.bank}"
-    puts "bet: 10$" # insert a real bet
+    puts "bet: #{@new_player.bet}"
     puts
     
     if @dealer.sum_two < 17
@@ -122,13 +122,13 @@ class Game
       puts "dealer: *, *, *"
       puts "sum: *"
       puts "bank: #{@dealer.bank}"
-      puts "bet: 10$"
+      puts "bet: #{@dealer.bet}"
       puts "-------------"
     else
       puts "dealer: *, *"
       puts "sum: *"
       puts "bank: #{@dealer.bank}"
-      puts "bet: 10$"
+      puts "bet: #{@dealer.bet}"
       puts "-------------"
     end
     puts "#{@new_player.name}, enter your choice:"
@@ -158,8 +158,24 @@ class Game
       final_sum_dealer = @dealer.sum_two
       puts "sum: #{final_sum_dealer}"
     end
-    puts "player win" if final_sum_player > final_sum_dealer
-    puts "dealer win" if final_sum_player < final_sum_dealer
+    puts
+    if final_sum_player > final_sum_dealer && final_sum_player < TWENTY_ONE+1
+      puts "player win"
+    elsif final_sum_player < final_sum_dealer && final_sum_dealer < TWENTY_ONE+1
+      puts "dealer win"
+    elsif final_sum_dealer > TWENTY_ONE+1
+      puts "player win"
+    elsif final_sum_player > TWENTY_ONE+1
+      puts "dealer win"
+    elsif final_sum_player == final_sum_dealer
+      puts "no winner"
+    end
+    puts
+    puts "#{@new_player.name}, enter your choice:"
+    MENU_4.each { |item| puts "#{item[:index]}: #{item[:title]}" }
+    choice = gets.chomp.to_i
+    need_item = MENU_4.find { |item| item[:index] == choice }
+    send(need_item[:action])
   end
 
   def make_bet

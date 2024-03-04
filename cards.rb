@@ -17,6 +17,12 @@ class Cards
     end
   end
 
+  def self.best_cards(user) # test example
+    user.hand.push(@@cards[36]) # дама пик
+    user.hand.push(@@cards[24]) # король бубен
+    user.hand.push(@@cards[51]) # туз крестей
+  end
+
   def self.print_cards
     @@cards.each { |element| puts "#{element.card_number}, #{element.card_owner}, #{element.card_suit}, #{element.card_power}, #{element.card_force}"}
   end
@@ -106,6 +112,17 @@ class Cards
     # puts "#{@@cards[25]}: #{@@cards[25].card_number}, #{@@cards[25].card_owner}, #{@@cards[25].card_suit}, #{@@cards[25].card_power}, #{@@cards[25].card_force}"
     # puts "#{@@cards[38]}: #{@@cards[38].card_number}, #{@@cards[38].card_owner}, #{@@cards[38].card_suit}, #{@@cards[38].card_power}, #{@@cards[38].card_force}"
     # puts "#{@@cards[51]}: #{@@cards[51].card_number}, #{@@cards[51].card_owner}, #{@@cards[51].card_suit}, #{@@cards[51].card_power}, #{@@cards[51].card_force}"
+  end
+
+  def self.recalculate_A2(user)
+    user.hand.each { |element| puts element.card_force = 1 if element.card_number == 13 || element.card_number == 26 || element.card_number == 39 || element.card_number == 52 }
+  end
+
+  def self.get_cards(user)
+    user.hand << @@cards[12]
+    user.hand << @@cards[25]
+    user.hand << @@cards[38]
+    user.hand << @@cards[51]
   end
 
   def initialize(card_number, card_owner, card_suit, card_power, card_force) # need code formatting
